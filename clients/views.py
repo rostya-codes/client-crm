@@ -9,19 +9,17 @@ class HomeView(TemplateView):
     template_name = 'clients/index.html'
 
 
-class AddClientView(TemplateView):
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+from .models import Client
+from .forms import ClientForm
+
+
+class AddClientView(CreateView):
+    model = Client
+    form_class = ClientForm
     template_name = 'clients/add_client.html'
-
-    def get(self, request, *args, **kwargs):
-        form = ClientForm()
-        return self.render_to_response({'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = ClientForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('clients:clients-list')
-        return self.render_to_response({'form': form})  # Щоб залишитися на формі з помилками
+    success_url = reverse_lazy('clients:clients-list')
 
 
 class ClientsListView(ListView):
