@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Home | CRM{% endblock %}
+
+{% block content %}
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Welcome to CRM</h1>
+            <p class="col-md-8 fs-4">This is your client management system. You can add new clients or view existing ones.</p>
+            <a href="{% url 'clients:add-client' %}" class="btn btn-primary btn-lg">Add New Client</a>
+            <br><br>
+            <!-- Button to go to the clients list -->
+            <a href="{% url 'clients:clients-list' %}" class="btn btn-secondary btn-lg">View Clients</a>
+        </div>
+    </div>
+{% endblock %}
